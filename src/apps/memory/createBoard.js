@@ -9,8 +9,11 @@ export const createBoard = (card) => {
         let item1 = { 
             backend: "??", 
             frontend: symbols, 
+            //si esta de frente o detras la tarjeta
             state: false, 
+            //tarjetas que ya han sido adivinadas
             done: false, 
+            //darle algun tipo de llave a las tarjetas para poder compararlas
             key: `card_${i}`,
             styles: "flex-container div",
         };

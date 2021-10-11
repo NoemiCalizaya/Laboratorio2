@@ -8,7 +8,7 @@ import { ScoreComponent } from "./ScoreComponent";
 import "./styles.css";
 let list = [];
 let twice = [];
-let score = 50;
+let score = 10;
 let oneCard = new OneCard();
 let twoCard = new TwoCard();
 let goodCard = new GoodCards();
@@ -21,12 +21,13 @@ export const MemoryComponent = () => {
         console.log(list);
     }, [])
     const [stateBoard, setStateBoard] = useState(list);
+    const [stateScore, setStateScore] = useState(score);
     const handlerClick = ({ id }) => {
             if (twice.length === 2 ) {
                 twice = [];
             }
             const item = stateBoard.find((item) => item.id === id);
-            oneCard.process(twice, item, score, stateBoard, setStateBoard);
+            oneCard.process(twice, item, stateScore, setStateScore, stateBoard, setStateBoard);
             /* if (twice.length === 0) {
                 twice = [...twice, item];
             }else if (twice.length === 1) {
@@ -65,15 +66,15 @@ export const MemoryComponent = () => {
         setStateBoard(newStateBoard);
      */
     };
-    return (
+    return <>
+    <div className="disablediv"> 
+        <ScoreComponent
+            stateScore={stateScore}
+        />
+    </div>
     <div>
         <h1>Memory app</h1>
         <hr />
-        <div className="body"> 
-            {<ScoreComponent
-                score={score}
-            />}
-        </div>
         <div className="flex-container"> 
             {stateBoard.map(item => (
             <CardComponent
@@ -84,5 +85,5 @@ export const MemoryComponent = () => {
             ))}
         </div>
     </div>
-    );
+    </>;
 };

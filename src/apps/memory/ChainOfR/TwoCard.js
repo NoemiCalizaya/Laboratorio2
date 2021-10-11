@@ -1,18 +1,20 @@
 import LogicGame from "./LogicGame";
 
 class TwoCard extends LogicGame {
-    process(twice, item, score, stateBoard, setStateBoard) {
+    process(twice, item, stateScore, setStateScore, stateBoard, setStateBoard) {
         if (twice.length === 1) {
             twice.push(item);
             const [item1] = twice;
             if (item1.key !== item.key) {
                 console.log("are different");
-                score = score - 5;
-                if (score === 0)
-                    alert("Game Over");
+                stateScore -= 5;
+                console.log(stateScore);
+                setStateScore(stateScore);
                 setTimeout(() => {
                     const newStateBoard = stateBoard.map((item) => {
                         if (item.done === false) {
+                            if (stateScore === 0)
+                                alert("Game Over");
                             item.state = false;
                             item.styles = "flex-container div";
                         }
@@ -21,7 +23,7 @@ class TwoCard extends LogicGame {
                     setStateBoard(newStateBoard);
                 }, 1000);
             } else {
-                this.next.process(twice, item, score, stateBoard, setStateBoard);
+                this.next.process(twice, item, stateScore, setStateScore, stateBoard, setStateBoard);
             }
         } 
     }

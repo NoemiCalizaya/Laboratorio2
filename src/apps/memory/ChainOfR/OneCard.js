@@ -1,11 +1,11 @@
 import LogicGame from "./LogicGame";
 
 class OneCard extends LogicGame {
-    process(twice, item, score, stateBoard, setStateBoard) {
+    process(twice, item, stateScore, setStateScore, stateBoard, setStateBoard) {
         if (twice.length === 0) {
             twice.push(item);
         } else {
-            this.next.process(twice, item, score, stateBoard, setStateBoard);
+            this.next.process(twice, item, stateScore, setStateScore, stateBoard, setStateBoard);
         }
         const newStateBoard = stateBoard.map((loop) => {
             if (loop.id === item.id) {
